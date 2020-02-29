@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:apple_sign_in/apple_sign_in.dart';
 
 class Login extends StatelessWidget {
   const Login({
     Key key,
-    @required this.onSubmit,
+    @required this.loginWithFacebook,
+    @required this.loginWithApple,
   }) : super(key:key);
 
-  final VoidCallback onSubmit;
+  final VoidCallback loginWithFacebook;
+  final VoidCallback loginWithApple;
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +20,16 @@ class Login extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             RaisedButton(
-              onPressed: onSubmit,
+              onPressed: loginWithFacebook,
               color: Colors.deepPurple,
               textColor: Colors.yellow,
               child: const Text(
                 'Sign in',
                 style: TextStyle(fontSize: 20)
               ),
+            ),
+            AppleSignInButton(
+              onPressed: loginWithApple,
             ),
           ],
         ),

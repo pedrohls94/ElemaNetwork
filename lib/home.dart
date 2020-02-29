@@ -26,21 +26,21 @@ class Home extends StatelessWidget {
             SizedBox(
               height: 20.0,
             ),
-            Center(
-              child: Container(
-                height: 200.0,
-                width: 200.0,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: NetworkImage(
-                      _profile['picture']['data']['url'],
-                    ),
-                  ),
-                ),
-              ),
-            )
+            // Center(
+            //   child: Container(
+            //     height: 200.0,
+            //     width: 200.0,
+            //     decoration: BoxDecoration(
+            //       shape: BoxShape.circle,
+            //       image: DecorationImage(
+            //         fit: BoxFit.fill,
+            //         image: NetworkImage(
+            //           _profile['picture']['data']['url'],
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // )
           ],
         ),
       ),

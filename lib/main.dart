@@ -5,6 +5,7 @@ import 'package:elema_network/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:http/http.dart' as http;
+import 'package:apple_sign_in/apple_sign_in.dart';
 
 void main() => runApp(MyApp());
 
@@ -34,13 +35,14 @@ class _MyHomePageState extends State<MyHomePage> {
   Login _loginPage;
 
   _MyHomePageState() {
-    _loginPage = new Login(onSubmit: () {
-      _login();
-    });
+    _loginPage = new Login(
+      loginWithFacebook: () {_loginWithFacebook();},
+      loginWithApple: () {_loginWithApple();},
+    );
     _screen = _loginPage;
   }
 
-  void _login() async {
+  void _loginWithFacebook() async {
     final facebookLogin = FacebookLogin();
     final result = await facebookLogin.logIn(['email']);
 
@@ -57,6 +59,28 @@ class _MyHomePageState extends State<MyHomePage> {
       case FacebookLoginStatus.cancelledByUser:
         break;
       case FacebookLoginStatus.error:
+        break;
+    }
+  }
+
+  void _loginWithApple() async {
+    final AuthorizationResult result = await AppleSignIn.performRequests([
+      AppleIdRequest(requestedScopes: [Scope.email, Scope.fullName])
+    ]);
+
+    switch (result.status) {
+      case AuthorizationStatus.authorized:
+        setState(() {
+          _screen = Home({'name':result.credential.fullName});
+        });
+        break;
+
+      case AuthorizationStatus.error:
+        print("Sign in failed: ${result.error.localizedDescription}");
+        break;
+
+      case AuthorizationStatus.cancelled:
+        print('User cancelled');
         break;
     }
   }
