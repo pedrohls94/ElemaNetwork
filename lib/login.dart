@@ -19,18 +19,41 @@ class Login extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            RaisedButton(
-              onPressed: loginWithFacebook,
-              color: Colors.deepPurple,
-              textColor: Colors.yellow,
-              child: const Text(
-                'Sign in',
-                style: TextStyle(fontSize: 20)
+            Row(children: <Widget>[
+              Expanded(
+                flex: 1,
+                child: Container()
               ),
-            ),
-            AppleSignInButton(
-              onPressed: loginWithApple,
-            ),
+              Expanded(
+                flex: 8,
+                child: Column(children: <Widget>[
+                  Row(children: <Widget>[
+                    Expanded(
+                      child: RaisedButton(
+                        onPressed: loginWithFacebook,
+                        color: Colors.deepPurple,
+                        textColor: Colors.yellow,
+                        child: const Text(
+                          'Sign in',
+                          style: TextStyle(fontSize: 20)
+                        ),
+                      )
+                    )
+                  ]),
+                  Row(children: <Widget>[
+                    Expanded(
+                      child: AppleSignInButton(
+                        onPressed: loginWithApple,
+                      ),
+                    )
+                  ])
+                ]),
+              ),
+              Expanded(
+                flex: 1,
+                child: Container()
+              )
+            ])
           ],
         ),
       ),
